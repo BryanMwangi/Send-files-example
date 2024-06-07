@@ -1,0 +1,31 @@
+[11:56:38.299] INFO (45017): Server listening on port 3000!
+[11:59:06.180] INFO (47106): Server listening on port 3000!
+[11:59:07.934] INFO (47184): Server listening on port 3000!
+[11:59:25.938] INFO (47184):
+    clubName: "testPostMan"
+    clubID: "1234"
+    geo: "BE"
+[12:01:36.088] INFO (47184):
+    clubName: "testPostMan"
+    clubID: "1234"
+    geo: "BE"
+[12:02:03.281] INFO (49624): Server listening on port 3000!
+[12:02:18.137] INFO (49895): Server listening on port 3000!
+[12:02:23.431] INFO (49895): ping request was made from undefined||::1
+[12:02:23.431] INFO (49895):
+    clubName: "testPostMan"
+    clubID: "1234"
+    geo: "BE"
+[12:10:24.429] INFO (56519): Server listening on port 3000!
+[12:10:35.306] INFO (56712): Server listening on port 3000!
+[12:10:50.219] INFO (56996): Server listening on port 3000!
+[12:11:30.764] INFO (57602): Server listening on port 3000!
+[20:47:50.442] INFO (13433): Server listening on port 5000!
+[21:07:31.545] INFO (42876): Server listening on port 5000!
+[21:14:01.277] INFO (52822): Server listening on port 5000!
+[22:12:09.517] INFO (38992): Server listening on port 5000!
+[22:12:58.440] INFO (40191): Server listening on port 5000!
+[22:13:27.985] INFO (40947): Server listening on port 5000!
+[22:13:54.570] INFO (41648): Server listening on port 5000!
+[22:22:51.623] INFO (54815): Server listening on port 5000!
+[22:46:37.491] INFO (88889): Server listening on port 5000!
