@@ -177,3 +177,8 @@
   transition: visibility 0s 1s, opacity 1s linear;
   height: 0;
 }
+.file-upload-speed {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}

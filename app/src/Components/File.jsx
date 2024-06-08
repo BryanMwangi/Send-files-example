@@ -33,16 +33,27 @@ const FileComponent = () => {
      */
     value: PropTypes.number.isRequired,
   };
-  const AnimatedProgress = ({ uploadingProgress }) => {
+  const AnimatedProgress = ({
+    uploadingProgress,
+    fileUploadSpeed,
+    fileEstimatedTime,
+  }) => {
     return (
       <div style={{ width: "100%" }}>
+        <p className="file-upload-speed">{fileUploadSpeed} MB/s</p>
+        <p className="file-upload-speed">
+          Estimated time: {fileEstimatedTime} seconds
+        </p>
+
         <LinearProgressWithLabel value={uploadingProgress} />
       </div>
     );
   };
   const UploadedFile = ({ file }) => {
     const fileName = file.Name || file.name;
-    const uploadingProgress = fileUploading?.[fileName];
+    const uploadingProgress = fileUploading?.[fileName].progress;
+    const fileUploadSpeed = fileUploading?.[fileName].speed;
+    const fileEstimatedTime = fileUploading?.[fileName].estimatedTime;
 
     return (
       <div
@@ -90,6 +101,10 @@ const FileComponent = () => {
             <AnimatedProgress
               uploadingProgress={
                 uploadingProgress != null ? uploadingProgress : 0
+              }
+              fileUploadSpeed={uploadingProgress != null ? fileUploadSpeed : 0}
+              fileEstimatedTime={
+                uploadingProgress != null ? fileEstimatedTime : 0
               }
             />
           </div>

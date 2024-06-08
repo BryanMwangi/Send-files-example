@@ -30,23 +30,57 @@ export const FileProvider = ({ children }) => {
   const handleUpload = async (acceptedFiles) => {
     const uploadPromises = acceptedFiles.map((file) => {
       return new Promise((reject) => {
+        // initialise parameters for calculating speed
+        let lastNow = Date.now() / 1000; //start time in seconds
+        let lastSpeedTest = 0;
+        let speedTest = 0;
+        let lastLoadedBytes = 0;
+        let estimatedTime = 0;
+        const MBConvert = 1024 * 1024;
         // Send the file to the server
         uploadFile(file, (progressEvent) => {
+          let now = Date.now() / 1000; //current time in seconds
           const progress = Math.round(
             (progressEvent.loaded / progressEvent.total) * 100
           );
+
+          lastLoadedBytes = progressEvent.loaded - lastLoadedBytes; // Loaded bytes
+
+          // Calculate the elapsed time
+          const elapsedTime = now - lastNow;
+          lastNow = now;
+
+          // Calculate the speed in MB/s
+          if (elapsedTime > 0) {
+            speedTest = Math.round(lastLoadedBytes / elapsedTime / MBConvert); // Convert bytes/sec to MB/sec
+            speedTest = Math.round((speedTest + lastSpeedTest) / 2); // Average speed
+            estimatedTime = Math.round(
+              (progressEvent.total / MBConvert -
+                progressEvent.loaded / MBConvert) /
+                speedTest // Estimated time in seconds
+            );
+          }
+
+          // reset the last speed test and loaded bytes
+          lastLoadedBytes = progressEvent.loaded;
+          lastSpeedTest = speedTest;
+
           // Update the progress for this file
           setFileUploading((prevProgress) => ({
             ...prevProgress,
-            [file.name]: progress,
+            [file.name]: {
+              progress: progress,
+              speed: speedTest,
+              estimatedTime: estimatedTime,
+            },
           }));
         })
           .then((response) => {
             console.log(response);
           })
           .catch((error) => {
-            console.log(error);
             reject(error);
+            throw new Error(error);
           });
       });
     });
